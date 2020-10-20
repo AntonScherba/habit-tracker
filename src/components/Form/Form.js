@@ -22,7 +22,6 @@ const Form = ({ habitTitle }) => {
         value={habitTitle}
       />
       <button type="submit">Submit</button>
-      <p>{habitTitle}</p>
     </form>
   );
 };

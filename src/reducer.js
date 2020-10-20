@@ -8,7 +8,6 @@ export default function (state, action) {
     case "Reset":
       return initialState;
     case "ADD_HABIT":
-      console.log(action.payload);
       return {
         ...state,
         habits: [
@@ -20,7 +19,6 @@ export default function (state, action) {
         ],
       };
     case "SET_HABIT_TITLE":
-      console.log(action.payload);
       return {
         ...state,
         habitTitle: action.payload,
