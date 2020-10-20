@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { Context } from "../../context";
 
-const Form = ({ habit }) => {
+const Form = ({ habitTitle }) => {
   const dispatch = useContext(Context);
 
   const onHabitSubmit = (event) => {
     event.preventDefault();
-    console.log(habit);
-    dispatch({ type: "ADD_HABIT", payload: habit });
+    dispatch({ type: "ADD_HABIT", payload: habitTitle });
+    dispatch({ type: "SET_HABIT_TITLE", payload: "" });
   };
 
   return (
@@ -15,14 +15,14 @@ const Form = ({ habit }) => {
       <h1>Make a Habit</h1>
       <input
         onChange={(e) =>
-          dispatch({ type: "ENTER_HABIT", payload: e.target.value })
+          dispatch({ type: "SET_HABIT_TITLE", payload: e.target.value })
         }
         type="text"
-        name="habit"
         placeholder="entert some habit"
+        value={habitTitle}
       />
       <button type="submit">Submit</button>
-      <p>{habit}</p>
+      <p>{habitTitle}</p>
     </form>
   );
 };

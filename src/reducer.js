@@ -1,5 +1,5 @@
 export const initialState = {
-  habit: "",
+  habitTitle: "",
   habits: [],
 };
 
@@ -11,15 +11,19 @@ export default function (state, action) {
       console.log(action.payload);
       return {
         ...state,
-        habits: {
-          id: Date.now(),
-          title: action.payload,
-        },
+        habits: [
+          ...state.habits,
+          {
+            id: Date.now(),
+            title: action.payload,
+          },
+        ],
       };
-    case "ENTER_HABIT":
+    case "SET_HABIT_TITLE":
+      console.log(action.payload);
       return {
         ...state,
-        habit: action.payload,
+        habitTitle: action.payload,
       };
 
     default:
