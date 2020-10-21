@@ -1,0 +1,26 @@
+.container {
+  border: black 1px solid;
+  display: inline-block;
+  text-align: center;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(3, auto);
+  grid-gap: 4px;
+  margin: 0px 5px 5px 5px;
+}
+
+.month {
+  border: none;
+  background-color: white;
+  padding: 5px;
+  font-size: 1rem;
+  outline: none;
+  border-radius: 3px;
+}
+
+.month:focus {
+  background-color: cadetblue;
+}

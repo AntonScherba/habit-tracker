@@ -1,20 +1,23 @@
 import React from "react";
+import "./Calendar.css";
 
 const Calendar = () => {
   return (
-    <div>
-      <p>habit</p>
-      <div>
-        <p>Day</p>
-        <ul>
-          <li>m</li>
-          <li>t</li>
-          <li>w</li>
-          <li>t</li>
-          <li>f</li>
-          <li>s</li>
-          <li>s</li>
-        </ul>
+    <div className="container">
+      <h3>Month</h3>
+      <div className="calendar">
+        <button className="month">Jan</button>
+        <button className="month">Feb</button>
+        <button className="month">Mar</button>
+        <button className="month">Apr</button>
+        <button className="month">May</button>
+        <button className="month">Jun</button>
+        <button className="month">Jul</button>
+        <button className="month">Aug</button>
+        <button className="month">Sep</button>
+        <button className="month">Oct</button>
+        <button className="month">Nov</button>
+        <button className="month">Dec</button>
       </div>
     </div>
   );
