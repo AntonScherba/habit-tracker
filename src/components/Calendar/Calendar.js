@@ -1,12 +1,29 @@
 import React from "react";
+import Month from "../Month/Month";
 import "./Calendar.css";
 
 const Calendar = () => {
+  const date = (m) => {
+    const date = new Date(m);
+    const month = date.toLocaleString("default", {
+      month: "short",
+      day: "2-digit",
+    });
+    console.log(month);
+  };
+
   return (
     <div className="container">
       <h3>Month</h3>
       <div className="calendar">
-        <button className="month">Jan</button>
+        <button
+          onClick={() => {
+            date(1);
+          }}
+          className="month"
+        >
+          Jan
+        </button>
         <button className="month">Feb</button>
         <button className="month">Mar</button>
         <button className="month">Apr</button>
