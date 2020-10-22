@@ -9,12 +9,12 @@ import "./App.css";
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { habitTitle, habits } = state;
+  const { habitTitle, habits, dateToday } = state;
 
   return (
     <Context.Provider value={dispatch}>
       <Form habitTitle={habitTitle} />
-      <Calendar />
+      <Calendar dateToday={dateToday} />
       <HabitList habits={habits} />
     </Context.Provider>
   );

@@ -1,6 +1,11 @@
 export const initialState = {
   habitTitle: "",
   habits: [],
+  dateToday: {
+    year: new Date().getFullYear(),
+    month: new Date().getMonth(),
+    day: new Date().getDate(),
+  },
 };
 
 export default function (state, action) {
@@ -23,7 +28,6 @@ export default function (state, action) {
         ...state,
         habitTitle: action.payload,
       };
-
     default:
       return state;
   }

@@ -1,40 +1,47 @@
 import React from "react";
 import Month from "../Month/Month";
+
 import "./Calendar.css";
 
-const Calendar = () => {
-  const date = (m) => {
-    const date = new Date(m);
-    const month = date.toLocaleString("default", {
-      month: "short",
-      day: "2-digit",
-    });
-    console.log(month);
+const Calendar = ({ dateToday }) => {
+  const { year, month, day } = dateToday;
+
+  const date = (year) => {
+    const numberOfMonth = 12;
+    let arr = [];
+    for (let i = 1; i <= numberOfMonth; i++) {
+      const date = new Date(year, i, 0);
+      const month = date.toLocaleString("en", {
+        month: "short",
+      });
+      const daysOfMonth = date.getDate();
+      arr.push({ month: month, days: daysOfMonth });
+    }
+    return arr;
+  };
+
+  const renderDay = (d) => {
+    for (let i = 0; i < d; i++) {
+      const day = i;
+      return <p className="day">{day}</p>;
+      console.log(day);
+    }
   };
 
   return (
-    <div className="container">
-      <h3>Month</h3>
-      <div className="calendar">
-        <button
-          onClick={() => {
-            date(1);
-          }}
-          className="month"
-        >
-          Jan
-        </button>
-        <button className="month">Feb</button>
-        <button className="month">Mar</button>
-        <button className="month">Apr</button>
-        <button className="month">May</button>
-        <button className="month">Jun</button>
-        <button className="month">Jul</button>
-        <button className="month">Aug</button>
-        <button className="month">Sep</button>
-        <button className="month">Oct</button>
-        <button className="month">Nov</button>
-        <button className="month">Dec</button>
+    <div>
+      <div className="container">
+        <label>{`Year: ${year}`}</label>
+        <h3 className="title">Month</h3>
+        <div className="calendar">
+          {date(year).map((item, i) => (
+            <Month key={i} month={item.month} days={item.days} />
+          ))}
+        </div>
+      </div>
+      <div>
+        {renderDay(day)}
+        <p className="day">{day}</p>
       </div>
     </div>
   );

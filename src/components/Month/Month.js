@@ -1,10 +1,11 @@
 import React from "react";
+import Day from "../Day/Day";
 
-const Month = ({ month }) => {
+const Month = ({ month, days }) => {
   return (
-    <button onClick={(e) => console.log(e.target.value)} className="month">
-      {month}
-    </button>
+    <div>
+      <button className="month">{month}</button>
+    </div>
   );
 };
 
