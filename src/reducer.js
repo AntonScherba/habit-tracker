@@ -6,6 +6,10 @@ export const initialState = {
     month: new Date().getMonth(),
     day: new Date().getDate(),
   },
+  calendar: {
+    months: [],
+    days: [],
+  },
 };
 
 export default function (state, action) {
