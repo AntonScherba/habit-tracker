@@ -1,11 +1,11 @@
 import React from "react";
 import Month from "../Month/Month";
-import Day from "../Day/Day";
+// import Day from "../Day/Day";
 import { initCalendar } from "../../functions";
 import "./Calendar.css";
 
 const Calendar = ({ dateToday }) => {
-  const { year, m } = dateToday;
+  const { year } = dateToday;
   const calendar = initCalendar(year);
   return (
     <div>
