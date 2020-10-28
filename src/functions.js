@@ -10,10 +10,6 @@ export const initCalendar = (year) => {
       month: "short",
       //   day: "numeric",
     };
-    const month = {
-      title: date.toLocaleDateString("en-GB", options),
-      numeric: i,
-    };
     let days = [];
     const daysOfMonth = date.getDate();
 
@@ -21,7 +17,12 @@ export const initCalendar = (year) => {
       const day = i;
       days.push({ day: day, isChecked: false });
     }
-    calendar.push({ month: month, days: days });
+    let month = {
+      titleOfMonth: date.toLocaleDateString("en-GB", options),
+      numeric: i,
+      days: days,
+    };
+    calendar.push(month);
   }
   return calendar;
 };

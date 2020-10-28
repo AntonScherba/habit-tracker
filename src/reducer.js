@@ -6,15 +6,12 @@ export const initialState = {
     month: new Date().getMonth(),
     day: new Date().getDate(),
   },
-  calendar: {
-    months: [],
-    days: [],
-  },
+  calendar: [],
 };
 
 export default function (state, action) {
   switch (action.type) {
-    case "Reset":
+    case "RESET":
       return initialState;
     case "ADD_HABIT":
       return {
@@ -31,6 +28,11 @@ export default function (state, action) {
       return {
         ...state,
         habitTitle: action.payload,
+      };
+    case "INIT_CALENDAR":
+      return {
+        ...state,
+        calendar: action.payload,
       };
     default:
       return state;

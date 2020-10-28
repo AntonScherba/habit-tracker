@@ -1,7 +1,7 @@
 import React from "react";
 
 const Day = ({ day }) => {
-  return <button>{day}</button>;
+  return <td>{day}</td>;
 };
 
 export default Day;

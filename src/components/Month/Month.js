@@ -1,10 +1,15 @@
 import React from "react";
 
-const Month = ({ month, onClick }) => {
+const Month = ({ title, isChecked }) => {
   return (
-    <button onClick={onClick} className="month" value={month}>
-      {month}
-    </button>
+    <label>
+      {title}
+      <input checked={isChecked} type="radio" name="month" value={title} />
+    </label>
+
+    // <button autoFocus="true" className="month" value={title}>
+    //   {title}
+    // </button>
   );
 };
 
