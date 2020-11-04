@@ -1,24 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
 import Month from "../Month/Month";
-// import Day from "../Day/Day";
+import { initCalendar } from "../../functions";
+import { Context } from "../../context";
 import "./Calendar.css";
 
 const Calendar = ({ dateToday, calendar }) => {
-  const { year, month, day } = dateToday;
-  console.log(year, month, day);
+  // const { year, month, day } = dateToday;
+  const dispatch = useContext(Context);
 
   return (
     <div>
-      <div className="container">
-        <p>{`Year: ${year}`}</p>
-        <p className="title">Month</p>
-        <div className="calendar" onChange={(e) => console.log(e.target.value)}>
-          {calendar.map((month, i) => (
+      <div className="calendar">
+        <input
+          className="year"
+          onChange={(e) => {
+            dispatch({
+              type: "UPDATE_CALENDAR",
+              payload: initCalendar(Number(e.target.value)),
+            });
+          }}
+          type="number"
+          value={calendar.year}
+        />
+        <div className="month-conteiner">
+          {calendar.months.map((month, i) => (
             <Month
               key={i}
-              title={month.titleOfMonth}
-              days={month.days.length}
-              isChecked={month.days.isChecked}
+              title={month.titleMonth}
+              month={month}
+              onClick={() => dispatch({ type: "SET_MONTH", payload: i })}
             />
           ))}
         </div>

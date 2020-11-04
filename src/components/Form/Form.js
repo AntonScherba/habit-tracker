@@ -4,8 +4,8 @@ import { Context } from "../../context";
 const Form = ({ habitTitle }) => {
   const dispatch = useContext(Context);
 
-  const onHabitSubmit = (event) => {
-    event.preventDefault();
+  const onHabitSubmit = (e) => {
+    e.preventDefault();
     dispatch({ type: "ADD_HABIT", payload: habitTitle });
     dispatch({ type: "SET_HABIT_TITLE", payload: "" });
   };

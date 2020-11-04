@@ -1,9 +1,16 @@
 import React from "react";
+import Day from "../Day/Day";
+import "./Habit.css";
 
-const Habit = ({ title }) => {
+const Habit = ({ title, days }) => {
   return (
     <tr>
-      <td>{title}</td>
+      <td className="habit">
+        {title} <button>del</button>
+      </td>
+      {days.map((day, i) => (
+        <Day key={i} />
+      ))}
     </tr>
   );
 };

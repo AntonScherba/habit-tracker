@@ -1,15 +1,20 @@
-.container {
+.calendar {
   border: black 1px solid;
   display: inline-block;
   text-align: center;
 }
 
-.calendar {
+.month-conteiner {
   display: grid;
   grid-template-columns: repeat(4, auto);
   grid-template-rows: repeat(3, auto);
   grid-gap: 4px;
   margin: 0px 5px 5px 5px;
+}
+
+.year {
+  text-align: center;
+  width: 50%;
 }
 
 .title {

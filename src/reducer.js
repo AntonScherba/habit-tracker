@@ -1,12 +1,17 @@
+import { initCalendar } from "./functions";
+
 export const initialState = {
   habitTitle: "",
-  habits: [],
+  habits: [
+    { id: Date.now(), title: "Drink water" },
+    { id: Date.now() + 1, title: "Sleep 8 hours" },
+  ],
   dateToday: {
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
     day: new Date().getDate(),
   },
-  calendar: [],
+  calendar: initCalendar(new Date().getFullYear()),
 };
 
 export default function (state, action) {
@@ -29,10 +34,18 @@ export default function (state, action) {
         ...state,
         habitTitle: action.payload,
       };
-    case "INIT_CALENDAR":
+    case "UPDATE_CALENDAR":
       return {
         ...state,
         calendar: action.payload,
+      };
+    case "SET_MONTH":
+      return {
+        ...state,
+        dateToday: {
+          ...state.dateToday,
+          month: action.payload,
+        },
       };
     default:
       return state;
