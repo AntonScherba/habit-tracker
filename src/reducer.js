@@ -37,7 +37,20 @@ export default function (state, action) {
     case "UPDATE_CALENDAR":
       return {
         ...state,
-        calendar: action.payload,
+        // calendar: initCalendar(action.payload),
+        calendar: { ...state.calendar, year: action.payload },
+      };
+    case "INCREASE_YEAR":
+      return {
+        ...state,
+        calendar: initCalendar(state.calendar.year + 1),
+        // calendar: { ...state.calendar, year: state.calendar.year + 1 },
+      };
+    case "DECREASE_YEAR":
+      return {
+        ...state,
+        calendar: initCalendar(state.calendar.year - 1),
+        // calendar: { ...state.calendar, year: state.calendar.year - 1 },
       };
     case "SET_MONTH":
       return {
