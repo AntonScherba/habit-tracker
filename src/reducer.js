@@ -12,6 +12,7 @@ export const initialState = {
     day: new Date().getDate(),
   },
   calendar: initCalendar(new Date().getFullYear()),
+  isYear: false,
 };
 
 export default function (state, action) {
@@ -37,19 +38,20 @@ export default function (state, action) {
     case "UPDATE_CALENDAR":
       return {
         ...state,
-        // calendar: initCalendar(action.payload),
-        calendar: { ...state.calendar, year: action.payload },
+        calendar: initCalendar(action.payload),
+        isYear: false,
+        // calendar: { ...state.calendar, year: action.payload },
       };
     case "INCREASE_YEAR":
       return {
         ...state,
-        calendar: initCalendar(state.calendar.year + 1),
+        calendar: initCalendar(state.calendar.year + action.payload),
         // calendar: { ...state.calendar, year: state.calendar.year + 1 },
       };
     case "DECREASE_YEAR":
       return {
         ...state,
-        calendar: initCalendar(state.calendar.year - 1),
+        calendar: initCalendar(state.calendar.year - action.payload),
         // calendar: { ...state.calendar, year: state.calendar.year - 1 },
       };
     case "SET_MONTH":
@@ -59,6 +61,11 @@ export default function (state, action) {
           ...state.dateToday,
           month: action.payload,
         },
+      };
+    case "SET_YEAR":
+      return {
+        ...state,
+        isYear: !state.isYear,
       };
     default:
       return state;
