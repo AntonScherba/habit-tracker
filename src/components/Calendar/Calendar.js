@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
 import Month from "../Month/Month";
 import Year from "../Year/Year";
-import InputNumber from "../InputNumber/InputNumber";
+import NavBarCalendar from "../NavBarCalendar/NavBarCalendar";
 import { Context } from "../../context";
 import "./Calendar.css";
 
-const Calendar = ({ dateToday, calendar, isYear }) => {
-  // const { year, month, day } = dateToday;
+const Calendar = ({ currentDate, calendar, isYear }) => {
+  const { year, month, day } = currentDate;
   const dispatch = useContext(Context);
+
+  console.log(calendar);
 
   const renderMonths = (months) => {
     const month = months.map((month, i) => (
@@ -15,10 +17,11 @@ const Calendar = ({ dateToday, calendar, isYear }) => {
         key={i}
         title={month.titleMonth}
         month={month}
+        isCurrent={month.isCurrent}
         onClick={() => dispatch({ type: "SET_MONTH", payload: i })}
       />
     ));
-    return <div className="month-conteiner">{month}</div>;
+    return <div className="elements-container">{month}</div>;
   };
 
   const renderYears = (year) => {
@@ -38,32 +41,29 @@ const Calendar = ({ dateToday, calendar, isYear }) => {
         />
       );
     }
-    return <div className="month-conteiner">{years}</div>;
+    return <div className="elements-container">{years}</div>;
   };
 
   if (isYear) {
     return (
-      <div className="calendar">
-        <InputNumber
-          onClick={() => dispatch({ type: "SET_YEAR" })}
-          year={calendar.year}
-          number={10}
-        />
-        {renderYears(calendar.year)}
-      </div>
-    );
-  } else {
-    return (
-      <div className="calendar">
-        <InputNumber
-          onClick={() => dispatch({ type: "SET_YEAR" })}
-          year={calendar.year}
-          number={1}
-        />
-        {renderMonths(calendar.months)}
+      <div className="calendar-conteiner">
+        <p onClick={() => dispatch({ type: "RESET" })}>
+          {`${day}.${month}.${year}`}
+        </p>
+        <NavBarCalendar year={calendar.currentYear} number={10} />
+        {renderYears(calendar.currentYear)}
       </div>
     );
   }
+  return (
+    <div className="calendar-conteiner">
+      <p onClick={() => dispatch({ type: "RESET" })}>
+        {`${day}.${month}.${year}`}
+      </p>
+      <NavBarCalendar year={calendar.currentYear} number={1} />
+      {renderMonths(calendar.months)}
+    </div>
+  );
 };
 
 export default Calendar;

@@ -6,12 +6,12 @@ export const initialState = {
     { id: Date.now(), title: "Drink water" },
     { id: Date.now() + 1, title: "Sleep 8 hours" },
   ],
-  dateToday: {
+  currentDate: {
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
     day: new Date().getDate(),
   },
-  calendar: initCalendar(new Date().getFullYear()),
+  calendar: initCalendar(new Date().getFullYear(), new Date().getMonth()),
   isYear: false,
 };
 
@@ -38,29 +38,30 @@ export default function (state, action) {
     case "UPDATE_CALENDAR":
       return {
         ...state,
-        calendar: initCalendar(action.payload),
-        isYear: false,
+        calendar: initCalendar(action.payload, 0),
         // calendar: { ...state.calendar, year: action.payload },
+        isYear: false,
       };
     case "INCREASE_YEAR":
       return {
         ...state,
-        calendar: initCalendar(state.calendar.year + action.payload),
+        calendar: initCalendar(state.calendar.currentYear + action.payload, 0),
         // calendar: { ...state.calendar, year: state.calendar.year + 1 },
       };
     case "DECREASE_YEAR":
       return {
         ...state,
-        calendar: initCalendar(state.calendar.year - action.payload),
+        calendar: initCalendar(state.calendar.currentYear - action.payload, 0),
         // calendar: { ...state.calendar, year: state.calendar.year - 1 },
       };
     case "SET_MONTH":
       return {
         ...state,
-        dateToday: {
-          ...state.dateToday,
-          month: action.payload,
-        },
+        // calendar: {
+        //   ...state.calendar,
+        //   currentMonth: action.payload,
+        // },
+        calendar: initCalendar(state.calendar.currentYear, action.payload),
       };
     case "SET_YEAR":
       return {

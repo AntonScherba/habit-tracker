@@ -9,17 +9,19 @@ import "./App.css";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { habitTitle, habits, dateToday, calendar, isYear } = state;
+  const { habitTitle, habits, currentDate, calendar, isYear } = state;
 
-  const days = calendar.months[dateToday.month].days;
-
-  console.log(calendar.year);
+  const days = calendar.months[calendar.currentMonth].days;
 
   return (
     <Context.Provider value={dispatch}>
       <div className="container">
         <Form habitTitle={habitTitle} />
-        <Calendar dateToday={dateToday} calendar={calendar} isYear={isYear} />
+        <Calendar
+          calendar={calendar}
+          currentDate={currentDate}
+          isYear={isYear}
+        />
       </div>
       <table>
         <thead>
@@ -34,7 +36,7 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          <HabitList habits={habits} days={days} />
+          <HabitList habits={habits} days={days.length} />
         </tbody>
       </table>
     </Context.Provider>

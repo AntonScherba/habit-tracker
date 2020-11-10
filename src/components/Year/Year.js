@@ -1,8 +1,13 @@
 import React from "react";
 
-const Year = ({ year, onClick }) => {
+const Year = ({ year, isCurrent, onClick }) => {
   return (
-    <button onClick={onClick} className="month" value={year}>
+    <button
+      onClick={onClick}
+      // className="calendar-element"
+      className={`calendar-element`}
+      value={year}
+    >
       {year}
     </button>
   );
