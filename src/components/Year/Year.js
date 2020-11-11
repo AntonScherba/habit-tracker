@@ -1,6 +1,6 @@
 import React from "react";
 
-const Year = ({ year, isCurrent, onClick }) => {
+const Year = ({ year, onClick }) => {
   return (
     <button
       onClick={onClick}

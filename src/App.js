@@ -10,8 +10,7 @@ import "./App.css";
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { habitTitle, habits, currentDate, calendar, isYear } = state;
-
-  const days = calendar.months[calendar.currentMonth].days;
+  const days = calendar.months[currentDate.month].days;
 
   return (
     <Context.Provider value={dispatch}>
@@ -28,7 +27,7 @@ function App() {
           <tr>
             <th>Day</th>
             {days.map((day, i) => (
-              <Day day={day.weekday} key={i} />
+              <Day day={day} key={i} />
             ))}
           </tr>
           <tr>

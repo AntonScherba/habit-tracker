@@ -1,10 +1,10 @@
 import React from "react";
 
-const Month = ({ title, onClick, isCurrent }) => {
+const Month = ({ title, onClick, isSelected }) => {
   return (
     <button
       onClick={onClick}
-      className={isCurrent ? `calendar-element current` : `calendar-element`}
+      className={isSelected ? `calendar-element current` : `calendar-element`}
       value={title}
     >
       {title}
