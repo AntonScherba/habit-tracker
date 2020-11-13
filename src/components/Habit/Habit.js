@@ -1,20 +1,20 @@
 import React from "react";
 import "./Habit.css";
 
-const Habit = ({ title, days }) => {
-  const renderDaysRow = (days) => {
-    const d = [];
-    for (let i = 0; i < days; i++) {
-      d.push(<td key={i} onClick={() => console.log(days)} />);
-    }
-    return d;
-  };
-
+const Habit = ({ title }) => {
   return (
-    <tr>
-      <td className="habit">{title}</td>
-      {renderDaysRow(days)}
-    </tr>
+    <li className="li-container">
+      <button className="done-button" title="I did it!">
+        <i className="fas fa-check" />
+      </button>
+      <span className="habit-title">{title}</span>
+      <button className="not-done-button" title="I didn't it.">
+        <i className="fas fa-times"></i>
+      </button>
+      <button className="delete-button" title="Move to trash.">
+        <i className="fas fa-trash"></i>
+      </button>
+    </li>
   );
 };
 

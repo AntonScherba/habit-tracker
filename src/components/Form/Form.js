@@ -4,24 +4,37 @@ import { Context } from "../../context";
 const Form = ({ habitTitle }) => {
   const dispatch = useContext(Context);
 
-  const onHabitSubmit = (e) => {
+  const handleChange = (e) => {
+    dispatch({ type: "SET_HABIT_TITLE", payload: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch({ type: "ADD_HABIT", payload: habitTitle });
+
+    if (habitTitle.length === 0) {
+      return;
+    }
+
+    const newHabit = {
+      id: Date.now(),
+      title: habitTitle,
+    };
+
+    dispatch({ type: "ADD_HABIT", payload: newHabit });
     dispatch({ type: "SET_HABIT_TITLE", payload: "" });
   };
 
   return (
-    <form onSubmit={onHabitSubmit}>
-      <h1>Make a Habit</h1>
+    <form onSubmit={handleSubmit}>
       <input
-        onChange={(e) =>
-          dispatch({ type: "SET_HABIT_TITLE", payload: e.target.value })
-        }
         type="text"
-        placeholder="entert some habit"
         value={habitTitle}
+        placeholder="entert some habit"
+        onChange={handleChange}
       />
-      <button type="submit">Submit</button>
+      <button type="submit" value="submit">
+        Submit
+      </button>
     </form>
   );
 };

@@ -1,72 +1,28 @@
-import { initCalendar } from "./functions";
-
 export const initialState = {
   habitTitle: "",
   habits: [
-    { id: Date.now(), title: "Drink water" },
-    { id: Date.now() + 1, title: "Sleep 8 hours" },
+    {
+      id: Date.now(),
+      title: "habitTitle",
+    },
   ],
-  currentDate: {
-    year: new Date().getFullYear(),
-    month: new Date().getMonth(),
-    day: new Date().getDate(),
-  },
-  calendar: initCalendar(new Date().getFullYear()),
-  isYear: false,
 };
 
 export default function (state, action) {
   switch (action.type) {
-    case "RESET":
-      return initialState;
     case "ADD_HABIT":
       return {
         ...state,
-        habits: [
-          ...state.habits,
-          {
-            id: Date.now(),
-            title: action.payload,
-          },
-        ],
+        habits: state.habits.concat(action.payload),
+      };
+    case "REMOVE_HABIT":
+      return {
+        ...state,
       };
     case "SET_HABIT_TITLE":
       return {
         ...state,
         habitTitle: action.payload,
-      };
-    case "UPDATE_CALENDAR":
-      return {
-        ...state,
-        calendar: initCalendar(action.payload),
-        // calendar: { ...state.calendar, year: action.payload },
-        isYear: false,
-      };
-    case "INCREASE_YEAR":
-      return {
-        ...state,
-        calendar: initCalendar(state.calendar.year + action.payload),
-        // calendar: { ...state.calendar, year: state.calendar.year + 1 },
-      };
-    case "DECREASE_YEAR":
-      return {
-        ...state,
-        calendar: initCalendar(state.calendar.year - action.payload),
-        // calendar: { ...state.calendar, year: state.calendar.year - 1 },
-      };
-    case "SET_MONTH":
-      return {
-        ...state,
-        // calendar: {
-        //   ...state.calendar,
-        //   currentMonth: action.payload,
-        // },
-        calendar: initCalendar(state.calendar.year),
-      };
-    case "SET_YEAR":
-      return {
-        ...state,
-        isYear: !state.isYear,
       };
     default:
       return state;
