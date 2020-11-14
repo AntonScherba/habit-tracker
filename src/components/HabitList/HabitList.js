@@ -5,7 +5,7 @@ const HabitList = ({ habits }) => {
   return (
     <ul>
       {habits.map((habit) => (
-        <Habit key={habit.id} title={habit.title} />
+        <Habit key={habit.id} title={habit.title} isDone={habit.isDone} />
       ))}
     </ul>
   );

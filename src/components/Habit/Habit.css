@@ -1,9 +1,49 @@
-.li-container {
+.list-container {
+  width: 100%;
+  background: #f3f3f3;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.habit-container {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  cursor: pointer;
-  background: #f3f3f3;
-  padding: 1rem;
+  margin-right: 4px;
+}
+
+.habit-title {
+  font-size: 20px;
+}
+
+.done-button,
+.not-done-button,
+.delete-button {
+  color: #fff;
+  background: #444;
+  padding: 16px 26px;
+}
+
+.done-button:hover {
+  color: forestgreen;
+}
+
+.done {
+  color: whitesmoke;
+  background-color: forestgreen;
+}
+
+.not-done-button:hover {
+  color: tomato;
+}
+
+.not-done {
+  color: whitesmoke;
+  background: tomato;
+}
+
+.delete-button:hover {
+  color: cornflowerblue;
 }

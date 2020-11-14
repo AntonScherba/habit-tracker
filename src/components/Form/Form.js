@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../../context";
+import "./Form.css";
 
 const Form = ({ habitTitle }) => {
   const dispatch = useContext(Context);
@@ -18,6 +19,7 @@ const Form = ({ habitTitle }) => {
     const newHabit = {
       id: Date.now(),
       title: habitTitle,
+      isDone: undefined,
     };
 
     dispatch({ type: "ADD_HABIT", payload: newHabit });
@@ -25,15 +27,22 @@ const Form = ({ habitTitle }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit}>
       <input
+        autoFocus
+        className="input-field"
         type="text"
         value={habitTitle}
-        placeholder="entert some habit"
+        placeholder="Habit title"
         onChange={handleChange}
       />
-      <button type="submit" value="submit">
-        Submit
+      <button
+        className="submit-button"
+        type="submit"
+        value="submit"
+        title="Add habit"
+      >
+        <i className="fas fa-plus"></i>
       </button>
     </form>
   );

@@ -12,7 +12,7 @@ function App() {
   return (
     <Context.Provider value={dispatch}>
       <div className="App">
-        <h1>HABIT TRACKER</h1>
+        <h1>{"Habit Tracker"}</h1>
         <Form habitTitle={habitTitle} />
         <HabitList habits={habits} />
       </div>

@@ -3,7 +3,18 @@ export const initialState = {
   habits: [
     {
       id: Date.now(),
-      title: "habitTitle",
+      title: "10000 steps",
+      isDone: "",
+    },
+    {
+      id: Date.now() + 1,
+      title: "Гулять",
+      isDone: true,
+    },
+    {
+      id: Date.now() + 2,
+      title: "Спать",
+      isDone: false,
     },
   ],
 };
