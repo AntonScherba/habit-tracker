@@ -20,7 +20,7 @@
 
 .done-button,
 .not-done-button,
-.delete-button {
+.remove-button {
   color: #fff;
   background: #444;
   padding: 16px 26px;
@@ -44,6 +44,6 @@
   background: tomato;
 }
 
-.delete-button:hover {
+.remove-button:hover {
   color: cornflowerblue;
 }

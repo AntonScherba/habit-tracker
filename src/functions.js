@@ -38,3 +38,7 @@ export const initCalendar = (year) => {
   }
   return calendar;
 };
+
+export const deepCopy = (array) => {
+  return JSON.parse(JSON.stringify(array));
+};

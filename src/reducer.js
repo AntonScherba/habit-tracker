@@ -17,6 +17,7 @@ export const initialState = {
       isDone: "not-done",
     },
   ],
+  currentDate: new Date().toLocaleDateString(),
 };
 
 export default function (state, action) {
@@ -26,9 +27,10 @@ export default function (state, action) {
         ...state,
         habits: state.habits.concat(action.payload),
       };
-    case "REMOVE_HABIT":
+    case "UPDATE_HABITS":
       return {
         ...state,
+        habits: action.payload,
       };
     case "SET_HABIT_TITLE":
       return {
