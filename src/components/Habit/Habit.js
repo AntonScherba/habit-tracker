@@ -4,7 +4,7 @@ import "./Habit.css";
 const Habit = ({ title, isDone }) => {
   return (
     <li className="list-container">
-      <div className={"habit-container " + (isDone ? "done" : "not-done")}>
+      <div className={`habit-container ${isDone}`}>
         <button className="done-button" title="I did it!">
           <i className="fas fa-check" />
         </button>

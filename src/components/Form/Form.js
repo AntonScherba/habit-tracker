@@ -19,7 +19,7 @@ const Form = ({ habitTitle }) => {
     const newHabit = {
       id: Date.now(),
       title: habitTitle,
-      isDone: undefined,
+      isDone: "",
     };
 
     dispatch({ type: "ADD_HABIT", payload: newHabit });

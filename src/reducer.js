@@ -9,12 +9,12 @@ export const initialState = {
     {
       id: Date.now() + 1,
       title: "Гулять",
-      isDone: true,
+      isDone: "done",
     },
     {
       id: Date.now() + 2,
       title: "Спать",
-      isDone: false,
+      isDone: "not-done",
     },
   ],
 };
