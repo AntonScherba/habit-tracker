@@ -1,49 +1,20 @@
-.list-container {
-  width: 100%;
-  background: #f3f3f3;
+li {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 4px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid black;
 }
 
-.habit-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-right: 4px;
-}
-
-.habit-title {
-  font-size: 20px;
-}
-
-.done-button,
-.not-done-button,
-.remove-button {
-  color: #fff;
-  background: #444;
-  padding: 16px 26px;
-}
-
-.done-button:hover {
-  color: forestgreen;
+li span {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .done {
-  color: whitesmoke;
-  background-color: forestgreen;
-}
-
-.not-done-button:hover {
-  color: tomato;
+  background-color: green;
 }
 
 .not-done {
-  color: whitesmoke;
-  background: tomato;
-}
-
-.remove-button:hover {
-  color: cornflowerblue;
+  background-color: red;
 }

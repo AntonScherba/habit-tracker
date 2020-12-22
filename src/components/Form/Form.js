@@ -12,14 +12,10 @@ const Form = ({ habitTitle }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (habitTitle.length === 0) {
-      return;
-    }
-
     const newHabit = {
       id: Date.now(),
       title: habitTitle,
-      isDone: "",
+      createdDate: Date.now(),
     };
 
     dispatch({ type: "ADD_HABIT", payload: newHabit });
@@ -29,20 +25,16 @@ const Form = ({ habitTitle }) => {
   return (
     <form className="form" onSubmit={handleSubmit}>
       <input
-        autoFocus
         className="input-field"
         type="text"
         value={habitTitle}
         placeholder="Habit title"
         onChange={handleChange}
+        autoFocus
+        required
       />
-      <button
-        className="submit-button"
-        type="submit"
-        value="submit"
-        title="Add habit"
-      >
-        <i className="fas fa-plus"></i>
+      <button className="submit-button" type="submit" title="Add Habit">
+        <i className="fas fa-plus" />
       </button>
     </form>
   );

@@ -1,23 +1,39 @@
 export const initialState = {
   habitTitle: "",
+
   habits: [
     {
-      id: Date.now(),
+      id: 1,
       title: "10000 steps",
-      isDone: "",
+      createdDate: new Date(),
     },
     {
-      id: Date.now() + 1,
-      title: "Гулять",
-      isDone: "done",
-    },
-    {
-      id: Date.now() + 2,
-      title: "Спать",
-      isDone: "not-done",
+      id: 2,
+      title: "don't drink alcohol",
+      createdDate: new Date(),
     },
   ],
-  currentDate: new Date().toLocaleDateString(),
+  tracker: [
+    {
+      habitId: 1,
+      id: 1,
+      date: new Date(),
+      isDone: true,
+    },
+    {
+      habitId: 2,
+      id: 5,
+      date: new Date(),
+      isDone: false,
+    },
+    {
+      habitId: 2,
+      id: 2,
+      date: new Date("2020-12-21"),
+      isDone: false,
+    },
+  ],
+  currentDate: new Date(),
 };
 
 export default function (state, action) {
@@ -36,6 +52,11 @@ export default function (state, action) {
       return {
         ...state,
         habitTitle: action.payload,
+      };
+    case "UPDATE_TRACKER":
+      return {
+        ...state,
+        tracker: action.payload,
       };
     default:
       return state;

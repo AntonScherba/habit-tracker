@@ -1,12 +1,7 @@
 import React from "react";
 
 const Date = ({ currentDate }) => {
-  console.log(currentDate);
-  return (
-    <div>
-      <span>{currentDate}</span>
-    </div>
-  );
+  return <span>{currentDate.toLocaleDateString()}</span>;
 };
 
 export default Date;

@@ -8,14 +8,15 @@ import "./App.css";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { habitTitle, habits, currentDate } = state;
+  const { habitTitle, habits, tracker, currentDate } = state;
+
   return (
     <Context.Provider value={dispatch}>
-      <div className="App">
+      <div className="app">
         <h1>{"Habit Tracker"}</h1>
         <Date currentDate={currentDate} />
         <Form habitTitle={habitTitle} />
-        <HabitList habits={habits} />
+        <HabitList habits={habits} tracker={tracker} />
       </div>
     </Context.Provider>
   );

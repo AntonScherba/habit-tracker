@@ -1,42 +1,76 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Habit from "../Habit/Habit";
 import { deepCopy } from "../../functions";
 import { Context } from "../../context";
 
-const HabitList = ({ habits }) => {
+const HabitList = ({ habits, tracker }) => {
   const dispatch = useContext(Context);
+  const [date, setDate] = useState(new Date());
 
-  const onHabitDone = (i) => {
-    const habitsCopy = deepCopy(habits);
-
-    habitsCopy[i].isDone = "done";
-    dispatch({ type: "UPDATE_HABITS", payload: habitsCopy });
+  const isDone = (id) => {
+    const isDone = tracker
+      .filter(
+        (track) => new Date(track.date).toDateString() === date.toDateString()
+      )
+      .filter((item) => item.habitId === id);
+    return isDone;
   };
 
-  const onHabitNotDone = (i) => {
-    const habitsCopy = deepCopy(habits);
+  const setClass = (id) => {
+    const done = isDone(id)[0];
 
-    habitsCopy[i].isDone = "not-done";
-    dispatch({ type: "UPDATE_HABITS", payload: habitsCopy });
+    if (done && done.isDone) {
+      return "done";
+    } else if (done && !done.isDone) {
+      return "not-done";
+    }
+    return "";
   };
 
-  const onHabitRemove = (id) => {
-    const habitsCopy = deepCopy(habits);
-    const filteredHabits = habitsCopy.filter((habit) => habit.id !== id);
+  const setDone = (id) => {
+    const trackerCopy = deepCopy(tracker);
 
-    dispatch({ type: "UPDATE_HABITS", payload: filteredHabits });
+    if (isDone(id).length > 0) {
+      for (let i = 0; i < trackerCopy.length; i++) {
+        const element = trackerCopy[i];
+        if (
+          new Date(element.date).toDateString() === date.toDateString() &&
+          element.habitId === id
+        ) {
+          element.isDone = !element.isDone;
+        }
+      }
+    } else {
+      const newTrack = {
+        habitId: id,
+        id: Date.now(),
+        date: date,
+        isDone: true,
+      };
+      trackerCopy.push(newTrack);
+    }
+    dispatch({ type: "UPDATE_TRACKER", payload: trackerCopy });
+  };
+
+  const removeHabit = (id) => {
+    const confirm = window.confirm(`Are you sure?`);
+    if (confirm) {
+      const habitsCopy = deepCopy(habits);
+      const filteredHabits = habitsCopy.filter((habit) => habit.id !== id);
+      dispatch({ type: "UPDATE_HABITS", payload: filteredHabits });
+    }
   };
 
   return (
     <ul>
-      {habits.map((habit, i) => (
+      <input type="date" onChange={(e) => setDate(new Date(e.target.value))} />
+      {habits.map((habit) => (
         <Habit
           key={habit.id}
           title={habit.title}
-          isDone={habit.isDone}
-          onHabitDone={() => onHabitDone(i)}
-          onHabitNotDone={() => onHabitNotDone(i)}
-          onHabitRemove={() => onHabitRemove(habit.id)}
+          isDone={setClass(habit.id)}
+          setDone={() => setDone(habit.id)}
+          removeHabit={() => removeHabit(habit.id)}
         />
       ))}
     </ul>
