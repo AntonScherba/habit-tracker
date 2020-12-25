@@ -27,16 +27,17 @@ const HabitList = ({ habits, tracker }) => {
     return "";
   };
 
+  const compareDate = (userDate) => {
+    return new Date(userDate).toDateString() === date.toDateString();
+  };
+
   const setDone = (id) => {
     const trackerCopy = deepCopy(tracker);
 
     if (isDone(id).length > 0) {
       for (let i = 0; i < trackerCopy.length; i++) {
         const element = trackerCopy[i];
-        if (
-          new Date(element.date).toDateString() === date.toDateString() &&
-          element.habitId === id
-        ) {
+        if (compareDate(element.date) && element.habitId === id) {
           element.isDone = !element.isDone;
         }
       }
@@ -63,12 +64,16 @@ const HabitList = ({ habits, tracker }) => {
 
   return (
     <ul>
-      <input type="date" onChange={(e) => setDate(new Date(e.target.value))} />
+      <input
+        type="date"
+        max={new Date().toISOString().split("T")[0]}
+        onChange={(e) => setDate(new Date(e.target.value))}
+      />
       {habits.map((habit) => (
         <Habit
           key={habit.id}
           title={habit.title}
-          isDone={setClass(habit.id)}
+          setClass={setClass(habit.id)}
           setDone={() => setDone(habit.id)}
           removeHabit={() => removeHabit(habit.id)}
         />

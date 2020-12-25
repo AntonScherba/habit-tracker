@@ -1,11 +1,19 @@
 import React from "react";
 import "./Habit.css";
 
-const Habit = ({ title, removeHabit, isDone, setDone }) => {
+const Habit = ({ title, removeHabit, setClass, setDone }) => {
   return (
-    <li className={isDone}>
+    <li className={setClass}>
       <span onClick={setDone}>{title}</span>
-      <button onClick={removeHabit}>&times;</button>
+
+      <div>
+        <button>
+          <i className="far fa-edit"></i>
+        </button>
+        <button onClick={removeHabit}>
+          <i className="fas fa-trash-alt"></i>
+        </button>
+      </div>
     </li>
   );
 };
