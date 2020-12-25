@@ -1,17 +1,17 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../../context";
 import "./Form.css";
 
-const Form = ({ habitTitle }) => {
+const Form = () => {
   const dispatch = useContext(Context);
+  const [habitTitle, sethabitTitle] = useState("");
 
-  const handleChange = (e) => {
-    dispatch({ type: "SET_HABIT_TITLE", payload: e.target.value });
+  const handleTextChange = (e) => {
+    sethabitTitle(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const newHabit = {
       id: Date.now(),
       title: habitTitle,
@@ -19,7 +19,7 @@ const Form = ({ habitTitle }) => {
     };
 
     dispatch({ type: "ADD_HABIT", payload: newHabit });
-    dispatch({ type: "SET_HABIT_TITLE", payload: "" });
+    sethabitTitle("");
   };
 
   return (
@@ -27,9 +27,9 @@ const Form = ({ habitTitle }) => {
       <input
         className="input-field"
         type="text"
-        value={habitTitle}
         placeholder="Habit title"
-        onChange={handleChange}
+        value={habitTitle}
+        onChange={handleTextChange}
         autoFocus
         required
       />

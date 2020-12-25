@@ -53,6 +53,11 @@ export default function (state, action) {
         ...state,
         habitTitle: action.payload,
       };
+    case "ADD_TRACK":
+      return {
+        ...state,
+        tracker: state.tracker.concat(action.payload),
+      };
     case "UPDATE_TRACKER":
       return {
         ...state,
