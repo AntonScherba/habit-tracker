@@ -5,7 +5,7 @@ export const initialState = {
     {
       id: 1,
       title: "10000 steps",
-      createdDate: new Date(),
+      createdDate: new Date("2020-12-21"),
     },
     {
       id: 2,

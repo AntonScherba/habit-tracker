@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import "./Habit.css";
 
-const Habit = ({ id, title, removeHabit, isDone, toggleDone, editTitle }) => {
+const Habit = ({
+  id,
+  title,
+  removeHabit,
+  isDone,
+  toggleDone,
+  editTitle,
+  created,
+}) => {
   const [isEditing, setEditing] = useState(false);
   const [newTitle, setNewTitle] = useState("");
 
@@ -19,13 +27,26 @@ const Habit = ({ id, title, removeHabit, isDone, toggleDone, editTitle }) => {
 
   const viewTemplate = (
     <div className="habit-template">
-      <span onClick={toggleDone}>{title}</span>
       <div>
-        <button name="edit" onClick={() => setEditing(true)}>
+        <span className="habit-title" onClick={toggleDone}>
+          {title}
+        </span>
+        <p>Created: {created.toLocaleDateString()}</p>
+      </div>
+
+      <div>
+        <button className="habit-button" name="show">
+          <i className="fas fa-eye"></i>
+        </button>
+        <button
+          className="habit-button"
+          name="edit"
+          onClick={() => setEditing(true)}
+        >
           <i className="far fa-edit" />
         </button>
-        <button name="remove" onClick={removeHabit}>
-          <i className="fas fa-trash-alt" />
+        <button className="habit-button" name="remove" onClick={removeHabit}>
+          <i className="fas fa-trash" />
         </button>
       </div>
     </div>
@@ -35,6 +56,7 @@ const Habit = ({ id, title, removeHabit, isDone, toggleDone, editTitle }) => {
     <form onSubmit={handleSubmit} className="habit-template">
       <label>
         <input
+          className="habit-input"
           type="text"
           value={newTitle}
           onChange={handleTextChange}
@@ -42,14 +64,15 @@ const Habit = ({ id, title, removeHabit, isDone, toggleDone, editTitle }) => {
           required
         />
       </label>
-      <div>
-        <button type="submit" name="save">
-          <i className="fas fa-save" />
-        </button>
-        <button type="button" name="close" onClick={() => setEditing(false)}>
-          <i className="fas fa-window-close" />
-        </button>
-      </div>
+
+      <button
+        className="habit-button"
+        type="button"
+        name="close"
+        onClick={() => setEditing(false)}
+      >
+        <i className="fas fa-times" />
+      </button>
     </form>
   );
 

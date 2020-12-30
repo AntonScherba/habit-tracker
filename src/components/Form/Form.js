@@ -4,10 +4,10 @@ import "./Form.css";
 
 const Form = () => {
   const dispatch = useContext(Context);
-  const [habitTitle, sethabitTitle] = useState("");
+  const [habitTitle, setHabitTitle] = useState("");
 
   const handleTextChange = (e) => {
-    sethabitTitle(e.target.value);
+    setHabitTitle(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -15,11 +15,11 @@ const Form = () => {
     const newHabit = {
       id: Date.now(),
       title: habitTitle,
-      createdDate: Date.now(),
+      createdDate: new Date(),
     };
 
     dispatch({ type: "ADD_HABIT", payload: newHabit });
-    sethabitTitle("");
+    setHabitTitle("");
   };
 
   return (

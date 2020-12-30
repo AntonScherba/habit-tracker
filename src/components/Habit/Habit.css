@@ -1,24 +1,115 @@
+:root {
+  --color-not-done-1-5: #fed3d5;
+  --color-not-done-1-0: rgba(244, 137, 142, 0.4);
+  --color-not-done-1-1: #fffdfe;
+  --color-not-done-1-2: #ffedee;
+  --color-not-done-1-3: #fcb2b6;
+  --color-not-done-1-4: #f4898e;
+
+  --color-done-2-5: #ccf0c8;
+  --color-done-2-0: rgba(123, 204, 114, 0.4);
+  --color-done-2-1: #fefffd;
+  --color-done-2-2: #ebfae9;
+  --color-done-2-3: #a6e2a0;
+  --color-done-2-4: #7acc72;
+}
+
+.color-primary-0 {
+  color: #bce2db;
+} /* Main Primary color */
+.color-primary-1 {
+  color: #fdfffe;
+}
+.color-primary-2 {
+  color: #e5f6f2;
+}
+.color-primary-3 {
+  color: #8bc5b9;
+}
+.color-primary-4 {
+  color: #599f91;
+}
+
+.color-complement-0 {
+  color: #ffe5d4;
+} /* Main Complement color */
+.color-complement-1 {
+  color: #fffefd;
+}
+.color-complement-2 {
+  color: #fff4ed;
+}
+.color-complement-3 {
+  color: #ffd2b4;
+}
+.color-complement-4 {
+  color: #f9b68b;
+}
+
+li {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.4);
+  /* background-color: rgba(89, 159, 145, 0.4); */
+  box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.2);
+}
+
 .habit-template {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 1rem;
   margin-bottom: 0.5rem;
-  border: 1px solid black;
 }
 
-li span {
+.habit-title {
   cursor: pointer;
   text-decoration: underline;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  font-size: 1.5rem;
 }
 
+.habit-input {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.habit-button {
+  font-size: 1.5rem;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin: 0 0.2rem;
+  background-color: whitesmoke;
+}
 .done {
-  background-color: green;
+  background-color: var(--color-done-2-0);
 }
 
 .not-done {
-  background-color: red;
+  background-color: var(--color-not-done-1-0);
+}
+
+.done .habit-button {
+  color: var(--color-done-2-4);
+}
+
+.not-done .habit-button {
+  color: var(--color-not-done-1-4);
+}
+
+.habit-button:hover {
+  background-color: rgba(128, 128, 128, 0.3);
+}
+
+.done .habit-button:hover {
+  /* color: var(--color-done-2-4); */
+  background-color: var(--color-done-2-2);
+}
+
+.not-done .habit-button:hover {
+  background-color: var(--color-not-done-1-2);
 }

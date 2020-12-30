@@ -34,6 +34,7 @@ const HabitList = ({ habits, tracker, currentDate }) => {
         if (compareDate(track.date) && track.habitId === id) {
           return { ...track, isDone: !track.isDone };
         }
+
         return track;
       });
       dispatch({ type: "UPDATE_TRACKER", payload: updateTracker });
@@ -79,6 +80,7 @@ const HabitList = ({ habits, tracker, currentDate }) => {
           key={habit.id}
           id={habit.id}
           title={habit.title}
+          created={habit.createdDate}
           isDone={setClass(habit.id)}
           toggleDone={() => toggleDone(habit.id)}
           removeHabit={() => removeHabit(habit.id)}
