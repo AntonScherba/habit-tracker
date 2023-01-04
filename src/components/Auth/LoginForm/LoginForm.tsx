@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../contexts/Auth';
 
 const LoginForm = () => {
@@ -8,6 +8,7 @@ const LoginForm = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isShowPassword, setShowPassword] = useState(false);
 
   const login = (event: React.FormEvent) => {
     event.preventDefault();
@@ -16,8 +17,8 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={login}>
-      <div className="mb-4">
+    <form className="space-y-6" onSubmit={login}>
+      <div>
         <label
           className="mb-2 block cursor-pointer text-sm text-gray-700"
           htmlFor="email"
@@ -35,7 +36,7 @@ const LoginForm = () => {
         />
       </div>
 
-      <div className="mb-4">
+      <div>
         <label
           className="mb-2 block cursor-pointer text-sm text-gray-700"
           htmlFor="password"
@@ -46,15 +47,44 @@ const LoginForm = () => {
           className="w-full border py-2 px-3 text-gray-700"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
-          type="password"
+          type={isShowPassword ? 'text' : 'password'}
           name="password"
           id="password"
           required
         />
       </div>
-      <button type="submit" className="w-full bg-blue-400 py-2 px-4">
-        Sign in
-      </button>
+
+      <div className="flex items-center justify-between">
+        <div>
+          <input
+            id="show-password"
+            type="checkbox"
+            name="showPassword"
+            checked={isShowPassword}
+            onChange={() => setShowPassword(!isShowPassword)}
+          />
+          <label className="ml-2 text-sm" htmlFor="show-password">
+            Show Password
+          </label>
+        </div>
+        <div className="text-sm">
+          <Link className="text-blue-600 hover:text-blue-500" to="/forgot">
+            Forgot your password?
+          </Link>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <button type="submit" className="w-full bg-blue-400 py-2 px-4">
+          Sign in
+        </button>
+        <div className="space-x-2 text-right text-sm">
+          <span>{"Don't have an account?"}</span>
+          <Link className="text-blue-600 hover:text-blue-500" to="/signup">
+            Sign Up
+          </Link>
+        </div>
+      </div>
     </form>
   );
 };

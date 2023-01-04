@@ -1,10 +1,4 @@
-import {
-  createContext,
-  ReactElement,
-  useState,
-  useContext,
-  useEffect,
-} from 'react';
+import { createContext, ReactElement, useState, useContext } from 'react';
 import {
   CognitoUserPool,
   CognitoUserAttribute,

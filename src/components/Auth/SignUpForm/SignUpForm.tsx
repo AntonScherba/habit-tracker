@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../contexts/Auth';
 
 const SignUpForm = () => {
@@ -17,8 +17,8 @@ const SignUpForm = () => {
   };
 
   return (
-    <form onSubmit={signUp}>
-      <div className="mb-4">
+    <form className="space-y-6" onSubmit={signUp}>
+      <div>
         <label
           className="mb-2 block cursor-pointer text-sm text-gray-700"
           htmlFor="email"
@@ -36,7 +36,7 @@ const SignUpForm = () => {
         />
       </div>
 
-      <div className="mb-4">
+      <div>
         <label
           className="mb-2 block cursor-pointer text-sm text-gray-700"
           htmlFor="password"
@@ -52,20 +52,31 @@ const SignUpForm = () => {
           id="password"
           required
         />
+      </div>
+      <div>
         <input
-          id="showPassword"
+          id="show-password"
           type="checkbox"
           name="showPassword"
           checked={isShowPassword}
           onChange={() => setShowPassword(!isShowPassword)}
         />
-        <label className="ml-2" htmlFor="showPassword">
+        <label className="ml-2 text-sm" htmlFor="show-password">
           Show Password
         </label>
       </div>
-      <button type="submit" className="w-full bg-blue-400 py-2 px-4">
-        Sign up
-      </button>
+
+      <div className="space-y-2">
+        <button type="submit" className="w-full bg-blue-400 py-2 px-4">
+          Sign in
+        </button>
+        <div className="space-x-2 text-right text-sm">
+          <span>Already have an account?</span>
+          <Link className="text-blue-600 hover:text-blue-500" to="/login">
+            Login
+          </Link>
+        </div>
+      </div>
     </form>
   );
 };
