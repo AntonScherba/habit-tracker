@@ -23,7 +23,7 @@ interface AuthContextType {
   login: (credentials: ICredentials, callback: VoidFunction) => void;
   signUp: (credentials: ICredentials, callback: VoidFunction) => void;
   confirmSignUp: (confirmation: IConfirmation, callback: VoidFunction) => void;
-  resendConfirmationCode?: VoidFunction;
+  resendConfirmationCode: (email: string, callback: VoidFunction) => void;
   logout: (callback: VoidFunction) => void;
   forgotPassword?: VoidFunction;
   changePassword?: VoidFunction;
@@ -130,7 +130,30 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     });
   };
 
-  const value = { userToken, signUp, confirmSignUp, login, logout };
+  const resendConfirmationCode = (email: string, callback: VoidFunction) => {
+    const cognitoUser = new CognitoUser({
+      Username: email,
+      Pool: UserPool,
+    });
+
+    cognitoUser.resendConfirmationCode((err, result) => {
+      if (err) {
+        alert(err.message || JSON.stringify(err));
+      } else {
+        callback();
+        console.log('call result: ' + result);
+      }
+    });
+  };
+
+  const value = {
+    userToken,
+    signUp,
+    confirmSignUp,
+    login,
+    logout,
+    resendConfirmationCode,
+  };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

@@ -76,7 +76,7 @@ const LoginForm = () => {
 
       <div className="space-y-2">
         <button type="submit" className="w-full bg-blue-400 py-2 px-4">
-          Sign in
+          Log In
         </button>
         <div className="space-x-2 text-right text-sm">
           <span>{"Don't have an account?"}</span>

@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import Default from './components/Layouts/Default/Default';
 import ErrorPage from './components/Layouts/ErrorPage';
-import Guest from './components/Layouts/Guest/Guest';
+import GuestLayout from './components/Layouts/Guest/GuestLayout';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 import Verify from './pages/Verify/Verify';
@@ -23,7 +23,7 @@ const routes: RouteObject[] = [
     ],
   },
   {
-    element: <Guest />,
+    element: <GuestLayout />,
     children: [
       {
         path: 'login',
