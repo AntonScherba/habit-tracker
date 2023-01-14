@@ -1,37 +1,39 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../../contexts/Auth';
 
-const SignUpForm = () => {
+const ResetPasswordForm = () => {
+  const [searchParams] = useSearchParams();
   const auth = useAuth();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [code, setCode] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const [isShowPassword, setShowPassword] = useState(false);
 
-  const signUp = (event: React.FormEvent) => {
+  const resetPassword = (event: React.FormEvent) => {
     event.preventDefault();
+    const email = searchParams.get('email') || '';
 
-    auth.signUp({ email, password }, () => navigate(`/verify?email=${email}`));
+    auth.confirmPassword(email, code, newPassword, () => navigate('/login'));
   };
 
   return (
-    <form className="space-y-6" onSubmit={signUp}>
+    <form className="space-y-6" onSubmit={resetPassword}>
       <div>
         <label
           className="mb-2 block cursor-pointer text-sm text-gray-700"
-          htmlFor="email"
+          htmlFor="code"
         >
-          Email
+          Code
         </label>
         <input
+          id="code"
           className="w-full border py-2 px-3 text-gray-700"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          type="email"
-          name="email"
-          id="email"
+          name="code"
+          type="text"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
           required
         />
       </div>
@@ -39,20 +41,21 @@ const SignUpForm = () => {
       <div>
         <label
           className="mb-2 block cursor-pointer text-sm text-gray-700"
-          htmlFor="password"
+          htmlFor="new-password"
         >
-          Password
+          New password
         </label>
         <input
           className="w-full border py-2 px-3 text-gray-700"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
+          onChange={(e) => setNewPassword(e.target.value)}
+          value={newPassword}
           type={isShowPassword ? 'text' : 'password'}
           name="password"
           id="password"
           required
         />
       </div>
+
       <div className="flex items-center">
         <input
           id="show-password"
@@ -68,17 +71,11 @@ const SignUpForm = () => {
 
       <div className="space-y-2">
         <button type="submit" className="w-full bg-blue-400 py-2 px-4">
-          Sign in
+          Reset my password
         </button>
-        <div className="space-x-2 text-right text-sm">
-          <span>Already have an account?</span>
-          <Link className="text-blue-600 hover:text-blue-500" to="/login">
-            Login
-          </Link>
-        </div>
       </div>
     </form>
   );
 };
 
-export default SignUpForm;
+export default ResetPasswordForm;

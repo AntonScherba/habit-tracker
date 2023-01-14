@@ -38,7 +38,8 @@ const VerifyForm = () => {
         <button type="submit" className="w-full bg-blue-400 py-2 px-4">
           Verify
         </button>
-        <div className="text-center text-sm">
+        <div className="space-x-2 text-right text-sm">
+          <span>{"Didn't recieve code?"}</span>
           <button
             type="button"
             className="text-blue-600 hover:text-blue-500"

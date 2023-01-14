@@ -55,7 +55,7 @@ const LoginForm = () => {
       </div>
 
       <div className="flex items-center justify-between">
-        <div>
+        <div className="flex items-center">
           <input
             id="show-password"
             type="checkbox"
@@ -63,12 +63,18 @@ const LoginForm = () => {
             checked={isShowPassword}
             onChange={() => setShowPassword(!isShowPassword)}
           />
-          <label className="ml-2 text-sm" htmlFor="show-password">
+          <label
+            className="ml-2 cursor-pointer text-sm"
+            htmlFor="show-password"
+          >
             Show Password
           </label>
         </div>
         <div className="text-sm">
-          <Link className="text-blue-600 hover:text-blue-500" to="/forgot">
+          <Link
+            className="text-blue-600 hover:text-blue-500"
+            to="/forgot-password"
+          >
             Forgot your password?
           </Link>
         </div>

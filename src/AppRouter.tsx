@@ -1,7 +1,9 @@
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
+import ResetPasswordForm from './components/Auth/ResetPasswordForm/ResetPasswordForm';
 import Default from './components/Layouts/Default/Default';
 import ErrorPage from './components/Layouts/ErrorPage';
 import GuestLayout from './components/Layouts/Guest/GuestLayout';
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 import Verify from './pages/Verify/Verify';
@@ -38,8 +40,12 @@ const routes: RouteObject[] = [
         element: <Verify />,
       },
       {
-        path: 'password-reset',
-        element: <div>password reset</div>,
+        path: 'forgot-password',
+        element: <ForgotPassword />,
+      },
+      {
+        path: 'reset-password',
+        element: <ResetPasswordForm />,
       },
     ],
   },

@@ -25,7 +25,13 @@ interface AuthContextType {
   confirmSignUp: (confirmation: IConfirmation, callback: VoidFunction) => void;
   resendConfirmationCode: (email: string, callback: VoidFunction) => void;
   logout: (callback: VoidFunction) => void;
-  forgotPassword?: VoidFunction;
+  forgotPassword: (email: string, callback: VoidFunction) => void;
+  confirmPassword: (
+    email: string,
+    code: string,
+    newPassword: string,
+    callback: VoidFunction
+  ) => void;
   changePassword?: VoidFunction;
   deleteUser?: VoidFunction;
 }
@@ -146,6 +152,46 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     });
   };
 
+  const forgotPassword = (email: string, callback: VoidFunction) => {
+    const cognitoUser = new CognitoUser({
+      Username: email,
+      Pool: UserPool,
+    });
+    console.log(cognitoUser);
+
+    cognitoUser.forgotPassword({
+      onSuccess: (data) => {
+        console.log('onSuccess', data);
+        callback();
+      },
+      onFailure: (err) => {
+        console.error(err);
+      },
+    });
+  };
+
+  const confirmPassword = (
+    email: string,
+    code: string,
+    newPassword: string,
+    callback: VoidFunction
+  ) => {
+    const cognitoUser = new CognitoUser({
+      Username: email,
+      Pool: UserPool,
+    });
+
+    cognitoUser.confirmPassword(code, newPassword, {
+      onSuccess: (success) => {
+        console.log(success);
+        callback();
+      },
+      onFailure: (err) => {
+        alert(err.message || JSON.stringify(err));
+      },
+    });
+  };
+
   const value = {
     userToken,
     signUp,
@@ -153,6 +199,8 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     login,
     logout,
     resendConfirmationCode,
+    forgotPassword,
+    confirmPassword,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -161,5 +209,3 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
 export function useAuth() {
   return useContext(AuthContext);
 }
-
-export default AuthContext;
