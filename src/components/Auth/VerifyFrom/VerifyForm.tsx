@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../contexts/Auth';
 
 const VerifyForm = () => {
-  const [searchParams] = useSearchParams();
+  const { state } = useLocation();
+  const { email } = state;
+
   const auth = useAuth();
   const navigate = useNavigate();
 
@@ -11,13 +13,11 @@ const VerifyForm = () => {
 
   const confirm = (event: React.FormEvent) => {
     event.preventDefault();
-    const email = searchParams.get('email') || '';
 
     auth.confirmSignUp({ email, code }, () => navigate('/login'));
   };
 
   const resendCode = () => {
-    const email = searchParams.get('email') || '';
     auth.resendConfirmationCode(email, () => {});
   };
 

@@ -11,7 +11,7 @@ const ForgotPasswordForm = () => {
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     auth.forgotPassword(email, () =>
-      navigate(`/password-reset?email=${email}`)
+      navigate(`/reset-password`, { state: { email } })
     );
   };
 

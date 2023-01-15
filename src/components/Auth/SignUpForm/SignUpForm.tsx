@@ -13,7 +13,9 @@ const SignUpForm = () => {
   const signUp = (event: React.FormEvent) => {
     event.preventDefault();
 
-    auth.signUp({ email, password }, () => navigate(`/verify?email=${email}`));
+    auth.signUp({ email, password }, () =>
+      navigate('/verify', { state: { email } })
+    );
   };
 
   return (

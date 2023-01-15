@@ -147,7 +147,6 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
         alert(err.message || JSON.stringify(err));
       } else {
         callback();
-        console.log('call result: ' + result);
       }
     });
   };
@@ -157,11 +156,9 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
       Username: email,
       Pool: UserPool,
     });
-    console.log(cognitoUser);
 
     cognitoUser.forgotPassword({
       onSuccess: (data) => {
-        console.log('onSuccess', data);
         callback();
       },
       onFailure: (err) => {
@@ -183,7 +180,6 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
 
     cognitoUser.confirmPassword(code, newPassword, {
       onSuccess: (success) => {
-        console.log(success);
         callback();
       },
       onFailure: (err) => {

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../contexts/Auth';
 
 const ResetPasswordForm = () => {
-  const [searchParams] = useSearchParams();
+  const { state } = useLocation();
   const auth = useAuth();
   const navigate = useNavigate();
 
@@ -13,7 +13,7 @@ const ResetPasswordForm = () => {
 
   const resetPassword = (event: React.FormEvent) => {
     event.preventDefault();
-    const email = searchParams.get('email') || '';
+    const { email } = state;
 
     auth.confirmPassword(email, code, newPassword, () => navigate('/login'));
   };
