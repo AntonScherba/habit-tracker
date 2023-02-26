@@ -33,7 +33,7 @@ interface AuthContextType {
     callback: VoidFunction
   ) => void;
   changePassword?: VoidFunction;
-  deleteUser?: VoidFunction;
+  deleteAccount: VoidFunction;
 }
 
 const poolData: ICognitoUserPoolData = {
@@ -188,6 +188,28 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     });
   };
 
+  const deleteAccount = () => {
+    const cognitoUser = UserPool.getCurrentUser();
+
+    cognitoUser?.getSession(function (err: any, result: any) {
+      if (err) {
+        alert(err.message || JSON.stringify(err));
+        return;
+      }
+      console.log('call result: ' + JSON.stringify(result));
+    });
+
+    cognitoUser?.deleteUser(function (err, result) {
+      if (err) {
+        alert(err.message || JSON.stringify(err));
+        return;
+      }
+
+      setUserToken('');
+      console.log('call result: ' + JSON.stringify(result));
+    });
+  };
+
   const value = {
     userToken,
     signUp,
@@ -197,6 +219,7 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     resendConfirmationCode,
     forgotPassword,
     confirmPassword,
+    deleteAccount,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
