@@ -28,13 +28,13 @@ const ResetPasswordForm = () => {
           Code
         </label>
         <input
-          id="code"
           className="w-full border py-2 px-3 text-gray-700"
+          id="code"
           name="code"
           type="text"
           value={code}
-          onChange={(e) => setCode(e.target.value)}
           required
+          onChange={(e) => setCode(e.target.value)}
         />
       </div>
 
@@ -47,21 +47,21 @@ const ResetPasswordForm = () => {
         </label>
         <input
           className="w-full border py-2 px-3 text-gray-700"
-          onChange={(e) => setNewPassword(e.target.value)}
-          value={newPassword}
-          type={isShowPassword ? 'text' : 'password'}
-          name="password"
           id="password"
+          name="password"
+          type={isShowPassword ? 'text' : 'password'}
+          value={newPassword}
           required
+          onChange={(e) => setNewPassword(e.target.value)}
         />
       </div>
 
       <div className="flex items-center">
         <input
-          id="show-password"
-          type="checkbox"
-          name="showPassword"
           checked={isShowPassword}
+          id="show-password"
+          name="showPassword"
+          type="checkbox"
           onChange={() => setShowPassword(!isShowPassword)}
         />
         <label className="ml-2 cursor-pointer text-sm" htmlFor="show-password">
@@ -70,7 +70,7 @@ const ResetPasswordForm = () => {
       </div>
 
       <div className="space-y-2">
-        <button type="submit" className="w-full bg-blue-400 py-2 px-4">
+        <button className="w-full bg-blue-400 py-2 px-4" type="submit">
           Reset my password
         </button>
       </div>

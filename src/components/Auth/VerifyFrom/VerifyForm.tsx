@@ -26,23 +26,23 @@ const VerifyForm = () => {
       <div className="mb-4">
         <input
           className="w-full border py-2 px-3 text-gray-700"
-          onChange={(e) => setCode(e.target.value)}
-          value={code}
-          type="string"
-          name="confirm"
           id="confirm"
+          name="confirm"
+          type="string"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
         />
       </div>
 
       <div className="space-y-2">
-        <button type="submit" className="w-full bg-blue-400 py-2 px-4">
+        <button className="w-full bg-blue-400 py-2 px-4" type="submit">
           Verify
         </button>
         <div className="space-x-2 text-right text-sm">
           <span>{"Didn't recieve code?"}</span>
           <button
-            type="button"
             className="text-blue-600 hover:text-blue-500"
+            type="button"
             onClick={resendCode}
           >
             Resend code

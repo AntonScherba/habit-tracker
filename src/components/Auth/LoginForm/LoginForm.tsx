@@ -27,12 +27,12 @@ const LoginForm = () => {
         </label>
         <input
           className="w-full border py-2 px-3 text-gray-700"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          type="email"
-          name="email"
           id="email"
+          name="email"
+          type="email"
+          value={email}
           required
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
 
@@ -45,22 +45,22 @@ const LoginForm = () => {
         </label>
         <input
           className="w-full border py-2 px-3 text-gray-700"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          type={isShowPassword ? 'text' : 'password'}
-          name="password"
           id="password"
+          name="password"
+          type={isShowPassword ? 'text' : 'password'}
+          value={password}
           required
+          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
 
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <input
-            id="show-password"
-            type="checkbox"
-            name="showPassword"
             checked={isShowPassword}
+            id="show-password"
+            name="showPassword"
+            type="checkbox"
             onChange={() => setShowPassword(!isShowPassword)}
           />
           <label
@@ -81,7 +81,7 @@ const LoginForm = () => {
       </div>
 
       <div className="space-y-2">
-        <button type="submit" className="w-full bg-blue-400 py-2 px-4">
+        <button className="w-full bg-blue-400 py-2 px-4" type="submit">
           Log In
         </button>
         <div className="space-x-2 text-right text-sm">

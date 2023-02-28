@@ -27,18 +27,18 @@ const ForgotPasswordForm = () => {
           }
         </label>
         <input
-          id="email"
           className="w-full border py-2 px-3 text-gray-700"
+          id="email"
           name="email"
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
           required
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
 
       <div className="space-y-2">
-        <button type="submit" className="w-full bg-blue-400 py-2 px-4">
+        <button className="w-full bg-blue-400 py-2 px-4" type="submit">
           Reset my password
         </button>
         <div className="space-x-2 text-right text-sm">

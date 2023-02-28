@@ -6,7 +6,7 @@ const GuestLayout = () => {
   const location = useLocation();
 
   if (auth.userToken) {
-    return <Navigate to="/" state={{ from: location }} replace />;
+    return <Navigate state={{ from: location }} to="/" replace />;
   }
 
   return (

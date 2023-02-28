@@ -13,11 +13,11 @@ const Input = (props: any) => {
       </label>
       <input
         className="block w-full border py-2 px-3 text-gray-700"
-        onChange={(e) => setValue(e.target.value)}
-        value={value}
-        name="password"
         id="password"
+        name="password"
+        value={value}
         required
+        onChange={(e) => setValue(e.target.value)}
       />
     </div>
   );
