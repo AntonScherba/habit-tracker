@@ -40,10 +40,7 @@ const defaultConfig = tseslint.config(
       ...angular.configs.templateAccessibility,
     ],
     rules: {},
-  }
+  },
 );
 
-module.exports = [
-  ...defaultConfig,
-  eslintConfigPrettier
-]
+module.exports = [...defaultConfig, eslintConfigPrettier];
