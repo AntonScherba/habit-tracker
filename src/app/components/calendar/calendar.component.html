@@ -1,0 +1,91 @@
+<div class="flex items-center justify-center">
+  <button class="p-4" (click)="calendarService.changeMonth(-1)"><</button>
+
+  <!-- <p>{{ calendarService.currentDate.format('DD-MM-YYYY') }}</p> -->
+
+  <button class="p-4" (click)="calendarService.changeMonth(1)">></button>
+</div>
+
+<div class="overflow-auto text-center">
+  <table>
+    <thead>
+      <tr>
+        <th
+          class="w-60 min-w-60 p-4 first:sticky first:left-0 first:top-0 first:z-10 first:bg-gradient-to-l first:from-transparent first:to-white first:to-10%"
+        >
+          Habit
+        </th>
+        @for (day of calendar; track $index) {
+          <td
+            class="sticky top-0 bg-gradient-to-t from-transparent to-white to-10% p-4"
+          >
+            {{ day.date() }}
+          </td>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th
+          class="w-60 min-w-60 p-4 first:sticky first:left-0 first:bg-gradient-to-l first:from-transparent first:to-white first:to-10%"
+        >
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe,
+          dolorum!
+        </th>
+        @for (day of calendar; track $index) {
+          <td>
+            <input class="h-6 w-6" type="checkbox" />
+          </td>
+        }
+      </tr>
+      <!-- <tr>
+            <th class="p-4 first:bg-gradient-to-l first:from-transparent first:to-white first:to-10% first:sticky first:left-0">test</th>
+            @for (day of calendar; track $index) {
+                <td>
+                  <input class="w-6 h-6" type="checkbox">
+                </td>
+            }
+          </tr>
+          <tr>
+            <th class="p-4 first:bg-gradient-to-l first:from-transparent first:to-white first:to-10% first:sticky first:left-0">test</th>
+            @for (day of calendar; track $index) {
+                <td>
+                  <input class="w-6 h-6" type="checkbox">
+                </td>
+            }
+          </tr>
+          <tr>
+            <th class="p-4 first:bg-gradient-to-l first:from-transparent first:to-white first:to-10% first:sticky first:left-0">test</th>
+            @for (day of calendar; track $index) {
+                <td>
+                  <input class="w-6 h-6" type="checkbox">
+                </td>
+            }
+          </tr>
+          <tr>
+            <th class="p-4 first:bg-gradient-to-l first:from-transparent first:to-white first:to-10% first:sticky first:left-0">test</th>
+            @for (day of calendar; track $index) {
+                <td>
+                  <input class="w-6 h-6" type="checkbox">
+                </td>
+            }
+          </tr>
+          <tr>
+            <th class="p-4 first:bg-gradient-to-l first:from-transparent first:to-white first:to-10% first:sticky first:left-0">test</th>
+            @for (day of calendar; track $index) {
+                <td>
+                  <input class="w-6 h-6" type="checkbox">
+                </td>
+            }
+          </tr>
+          <tr>
+            <th class="p-4 first:bg-gradient-to-l first:from-transparent first:to-white first:to-10% first:sticky first:left-0">test</th>
+            @for (day of calendar; track $index) {
+                <td>
+                  <input class="w-6 h-6" type="checkbox">
+                </td>
+            }
+          </tr> -->
+    </tbody>
+  </table>
+</div>
