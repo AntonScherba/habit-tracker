@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -7,10 +7,14 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CalendarService {
   date = new BehaviorSubject(dayjs());
-  currentDate = this.date.value.clone();
+  readonly currentDate = this.date.value.clone();
 
-  changeMonth(number: -1 | 1) {
-    const updatedDate = this.date.getValue().add(number, 'M');
+  changeMonth(dir: -1 | 1) {
+    const updatedDate = this.date.value.add(dir, 'M');
     this.date.next(updatedDate);
+  }
+
+  setDate(date: Dayjs) {
+    this.date.next(date);
   }
 }

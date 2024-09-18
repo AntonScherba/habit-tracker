@@ -13,6 +13,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^18.2.0",
+    "@angular/cdk": "^18.2.3",
     "@angular/common": "^18.2.0",
     "@angular/compiler": "^18.2.0",
     "@angular/core": "^18.2.0",
@@ -52,7 +53,7 @@
   },
   "lint-staged": {
     "*.{json,scss,md,ts,html}": [
-      "eslint",
+      "eslint --fix",
       "prettier --write"
     ]
   }
