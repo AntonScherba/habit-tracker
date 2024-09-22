@@ -27,6 +27,8 @@ const OFFSET = 3;
   encapsulation: ViewEncapsulation.None,
 })
 export class CalendarComponent implements OnInit, AfterViewInit {
+  #activeDateIndex = 0;
+
   calendarService = inject(CalendarService);
 
   calendar: Dayjs[] = [];
@@ -39,16 +41,15 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.#activeDateIndex = this.initialDateIndex;
+
     this.viewPort.scrolledIndexChange
       .pipe(delay(0), take(1))
       .subscribe(() => this.#waitScrolledChange());
   }
 
   #waitScrolledChange() {
-    const index = this.calendar.findIndex((date) =>
-      date.isSame(this.calendarService.currentDate),
-    );
-    this.scrollToDate(index, 'instant');
+    this.scrollToDate(this.#activeDateIndex, 'instant');
   }
 
   #getDateByIndex(index: number) {
@@ -62,11 +63,19 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   }
 
   onDayScroll(index: number) {
-    const date = this.#getDateByIndex(index + OFFSET);
+    // TODO figure out how to skip initial callback where index === 0
+    if (!this.initialized) {
+      this.initialized = true;
+      return;
+    }
+
+    this.#activeDateIndex = index + OFFSET;
+    const date = this.#getDateByIndex(this.#activeDateIndex);
     this.calendarService.setDate(date);
   }
 
   onDayClick(date: Dayjs, index: number) {
+    this.#activeDateIndex = index;
     this.calendarService.setDate(date);
     this.scrollToDate(index);
   }
@@ -75,10 +84,13 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     this.viewPort?.scrollToIndex(Math.max(index - OFFSET, 0), behavior);
   }
 
-  get isDisabled() {
-    const index = this.calendar.findIndex((date) =>
-      this.calendarService.date.value.isSame(date),
+  get initialDateIndex() {
+    return this.calendar.findIndex((date) =>
+      this.calendarService.currentDate.isSame(date),
     );
-    return this.calendar.slice(index + 1).length <= 3;
+  }
+
+  get isDisabled() {
+    return this.calendar.slice(this.#activeDateIndex + 1).length <= 3;
   }
 }

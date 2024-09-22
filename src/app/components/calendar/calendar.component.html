@@ -14,7 +14,6 @@
       <button
         *cdkVirtualFor="let day of calendar; let i = index"
         (click)="onDayClick(day, i)"
-        [disabled]="isDisabled"
         class="mx-1 flex h-8 w-8 snap-center items-center justify-center rounded-full bg-slate-400"
       >
         {{ day.toDate() | date: "d" }}
