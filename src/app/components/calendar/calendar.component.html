@@ -5,6 +5,7 @@
 
   <div class="mb-2 text-slate-400 before:content-['▼']"></div>
   <cdk-virtual-scroll-viewport
+    (scrolledIndexChange)="onDayScroll($event)"
     orientation="horizontal"
     itemSize="40"
     class="scrollbar-hidden h-8 w-[280px] snap-x"
@@ -12,7 +13,8 @@
     <div class="flex">
       <button
         *cdkVirtualFor="let day of calendar; let i = index"
-        (click)="onDayChange(day, i)"
+        (click)="onDayClick(day, i)"
+        [disabled]="isDisabled"
         class="mx-1 flex h-8 w-8 snap-center items-center justify-center rounded-full bg-slate-400"
       >
         {{ day.toDate() | date: "d" }}
