@@ -17,28 +17,6 @@ export class InfrastructureStack extends cdk.Stack {
       autoDeleteObjects: true,
     });
 
-    // new BucketDeployment(this, 'StaticSiteFilesDeployment', {
-    //   destinationBucket,
-    //   sources: [Source.asset('../frontend/out', { exclude: ['*.html', '404/*'] })],
-    //   cacheControl: [
-    //     CacheControl.maxAge(Duration.days(365)),
-    //     CacheControl.immutable(),
-    //   ],
-    //   retainOnDelete: false,
-    //   prune: false,
-    // });
-
-    // new BucketDeployment(this, 'HTMLSiteFilesDeployment', {
-    //   destinationBucket,
-    //   sources: [Source.asset('../frontend/out', { exclude: ['*', '!*.html'] })],
-    //   cacheControl: [
-    //     CacheControl.maxAge(Duration.seconds(60)),
-    //     CacheControl.staleWhileRevalidate(Duration.days(30)),
-    //   ],
-    //   retainOnDelete: false,
-    //   prune: false,
-    // });
-
     const distribution = new Distribution(this, 'StaticSiteDistribution', {
       defaultRootObject: 'index.html',
       defaultBehavior: {
