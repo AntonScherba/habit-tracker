@@ -70,9 +70,6 @@ jobs:
           name: dist
           path: dist
 
-      - name: Display structure of downloaded files
-        run: ls -R
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
