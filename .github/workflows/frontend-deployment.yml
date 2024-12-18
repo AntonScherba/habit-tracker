@@ -1,0 +1,66 @@
+name: Build and Deploy web app to AWS S3
+
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # Build and deploy frontend
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci --production
+        
+      - name: Build with Next.js
+        working-directory: ./frontend
+        run: npx --no-install next build
+
+      - name: List files in output directory
+        working-directory: ./frontend
+        run: ls -la ./out
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy to S3 (immutable)
+        working-directory: ./frontend
+        run: |
+          set -e
+          aws s3 sync ./out s3://${{ secrets.AWS_BUCKET }} \
+            --exclude "*.html" \
+            --exclude "404/*" \
+            --cache-control "max-age=31536000, immutable" \
+            --delete
+
+      - name: Deploy to S3 (html)
+        working-directory: ./frontend
+        run: |
+          set -e
+          aws s3 sync ./out s3://${{ secrets.AWS_BUCKET }} \
+          --exclude "*" \
+          --include "*.html" \
+          --cache-control "max-age=60, stale-while-revalidate=2592000" \
+          --delete
