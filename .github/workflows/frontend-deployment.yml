@@ -58,32 +58,41 @@ jobs:
           name: frontend-build
           path: ./frontend/out
 
-  deploy:
-    name: Deploy frontend
+  test:
+    name: log
     runs-on: ubuntu-latest
     needs: build
-
+    
     steps:
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+      - name: List files
+        run: ls -la
 
-      - name: Deploy to S3 (immutable)
-        run: |
-          set -e
-          aws s3 sync ./frontend/out s3://${{ secrets.AWS_BUCKET }} \
-            --exclude "*.html" \
-            --cache-control "max-age=31536000, immutable" \
-            --delete
+  # deploy:
+  #   name: Deploy frontend
+  #   runs-on: ubuntu-latest
+  #   needs: build
 
-      - name: Deploy to S3 (html)
-        run: |
-          set -e
-          aws s3 sync ./frontend/out s3://${{ secrets.AWS_BUCKET }} \
-          --exclude "*" \
-          --include "*.html" \
-          --cache-control "max-age=60, stale-while-revalidate=2592000" \
-          --delete
+  #   steps:
+  #     - name: Configure AWS credentials
+  #       uses: aws-actions/configure-aws-credentials@v4
+  #       with:
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         aws-region: ${{ secrets.AWS_REGION }}
+
+  #     - name: Deploy to S3 (immutable)
+  #       run: |
+  #         set -e
+  #         aws s3 sync ./ s3://${{ secrets.AWS_BUCKET }} \
+  #           --exclude "*.html" \
+  #           --cache-control "max-age=31536000, immutable" \
+  #           --delete
+
+  #     - name: Deploy to S3 (html)
+  #       run: |
+  #         set -e
+  #         aws s3 sync ./ s3://${{ secrets.AWS_BUCKET }} \
+  #         --exclude "*" \
+  #         --include "*.html" \
+  #         --cache-control "max-age=60, stale-while-revalidate=2592000" \
+  #         --delete
