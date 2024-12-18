@@ -55,7 +55,7 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: frontend-build
+          name: dist
           path: ./frontend/out
 
   deploy:
@@ -67,31 +67,32 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: frontend-build
+          name: dist
+          path: dist
 
       - name: Display structure of downloaded files
         run: ls -R
 
-      # - name: Configure AWS credentials
-      #   uses: aws-actions/configure-aws-credentials@v4
-      #   with:
-      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     aws-region: ${{ secrets.AWS_REGION }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-      # - name: Deploy to S3 (immutable)
-      #   run: |
-      #     set -e
-      #     aws s3 sync ./ s3://${{ secrets.AWS_BUCKET }} \
-      #       --exclude "*.html" \
-      #       --cache-control "max-age=31536000, immutable" \
-      #       --delete
+      - name: Deploy to S3 (immutable)
+        run: |
+          set -e
+          aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET }} \
+            --exclude "*.html" \
+            --cache-control "max-age=31536000, immutable" \
+            --delete
 
-      # - name: Deploy to S3 (html)
-      #   run: |
-      #     set -e
-      #     aws s3 sync ./ s3://${{ secrets.AWS_BUCKET }} \
-      #     --exclude "*" \
-      #     --include "*.html" \
-      #     --cache-control "max-age=60, stale-while-revalidate=2592000" \
-      #     --delete
+      - name: Deploy to S3 (html)
+        run: |
+          set -e
+          aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET }} \
+          --exclude "*" \
+          --include "*.html" \
+          --cache-control "max-age=60, stale-while-revalidate=2592000" \
+          --delete
