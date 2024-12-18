@@ -72,7 +72,6 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Deploy to S3 (immutable)
-        working-directory: ./frontend
         run: |
           set -e
           aws s3 sync ./out s3://${{ secrets.AWS_BUCKET }} \
@@ -81,7 +80,6 @@ jobs:
             --delete
 
       - name: Deploy to S3 (html)
-        working-directory: ./frontend
         run: |
           set -e
           aws s3 sync ./out s3://${{ secrets.AWS_BUCKET }} \
