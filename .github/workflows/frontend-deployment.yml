@@ -2,11 +2,11 @@ name: Build and Deploy web app to AWS S3
 
 on:
   push:
-    branches: [ main ]
+    branches: ["master"]
     paths:
       - 'frontend/**'
   pull_request:
-    branches: [ main ]
+    branches: ["master"]
     paths:
       - 'frontend/**'
 
