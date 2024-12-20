@@ -35,7 +35,7 @@ function DashboardLayout() {
 function DashboardIndex() {
   return (
     <div>
-      <h2>Dashboard Index</h2>
+      <h2>Dashboard</h2>
     </div>
   );
 }
